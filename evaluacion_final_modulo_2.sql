@@ -15,23 +15,31 @@ SELECT DISTINCT title
 
 -- 2. Muestra los nombres de todas las películas que tengan una clasificación de "PG-13". 
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: 'WHERE rating = "PG-13"' filtra los resultados y solo nos devuelve aquellas películas cuyo rating 
-es el que le indicamos. */
+ Explicación: 
+'WHERE rating = "PG-13"' --> filtra los resultados y solo nos devuelve aquellas películas cuyo rating 
+es el que le indicamos. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT title
 	FROM film
 	WHERE rating = "PG-13";
+    
 
 -- 3. Encuentra el título y la descripción de todas las películas que contengan la palabra "amazing" en su descripción.
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: Con el 'WHERE' filtramos la búsqueda, indicamos la columna dónde debe buscar, y con 'LIKE' 
+Explicación: 
+Con el 'WHERE' filtramos la búsqueda, indicamos la columna dónde debe buscar, y con 'LIKE' 
 buscamos patrones de texto en ella. Los signos de porcentaje (%) representan cualquier secuencia de caracteres, por lo 
-que "%amazing%" nos devolverá todo lo que contenga la palabra 'amazing' en cualquier parte de la descripción". */
+que "%amazing%" nos devolverá todo lo que contenga la palabra 'amazing' en cualquier parte de la descripción". 
 ---------------------------------------------------------------------------------------------
+*/
+
 
 SELECT title, description
 	FROM film
@@ -40,10 +48,13 @@ SELECT title, description
 
 -- 4. Encuentra el título de todas las películas que tengan una duración mayor a 120 minutos.
 
+
+/* 
 ---------------------------------------------------------------------------------------------
-/* Explicación: 'WHERE' filtra los resultados, devolviéndonos solo las películas cuya duración (length) 
-es mayor a 120 minutos.*/ 
+Explicación: 'WHERE' filtra los resultados, devolviéndonos solo las películas cuya duración (length) 
+es mayor a 120 minutos. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
  SELECT title
@@ -53,9 +64,11 @@ es mayor a 120 minutos.*/
 
 -- 5. Recupera los nombres de todos los actores.
 
+/*
 ---------------------------------------------------------------------------------------------
-/*. Obtendremos una lista con los nombres y apellidos de todos los actores en la tabla actor. */
+Explicación: Obtendremos una lista con los nombres y apellidos de todos los actores en la tabla actor. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT first_name, last_name
@@ -64,10 +77,13 @@ SELECT first_name, last_name
 
 -- 6. Encuentra el nombre y apellido de los actores que tengan "Gibson" en su apellido.
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: 'WHERE last_name = "Gibson"'--> seleccionará y devolverá las filas que cumplan con la condición 
-de que el apellido del actor sea 'Gibson'. */
+Explicación: 
+'WHERE last_name = "Gibson"'--> seleccionará y devolverá las filas que cumplan con la condición 
+de que el apellido del actor sea 'Gibson'. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT first_name, last_name
@@ -77,10 +93,13 @@ SELECT first_name, last_name
 
 -- 7. Encuentra los nombres de los actores que tengan un actor_id entre 10 y 20.
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: 'WHERE actor_id BETWEEN 10 AND 20' --> filtra los valores de la columna 'actor_id' y nos devuelve 
-los que están en el rango indicado. */
+Explicación: 
+'WHERE actor_id BETWEEN 10 AND 20' --> filtra los valores de la columna 'actor_id' y nos devuelve 
+los que están en el rango indicado. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT first_name, last_name
@@ -90,10 +109,13 @@ SELECT first_name, last_name
 
 -- 8. Encuentra el título de las películas en la tabla film que no sean ni "R" ni "PG-13" en cuanto a su clasificación.
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación:'WHERE rating NOT IN ('R', 'PG-13')' --> devuelve los valores que NO están en las clasificaciones que
- le hemos dado. */
+Explicación:
+'WHERE rating NOT IN ('R', 'PG-13')' --> devuelve los valores que NO están en las clasificaciones que
+ le hemos dado. 
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT title
@@ -103,7 +125,6 @@ SELECT title
 
 /* 9. Encuentra la cantidad total de películas en cada clasificación de la tabla film y muestra la clasificación junto
  con el recuento. 
- 
  
 --------------------------------------------------------------------------------------------- 
 Explicación: 
@@ -115,6 +136,7 @@ Explicación:
 SELECT rating, COUNT(title) AS total_movies
 	FROM film 
 	GROUP BY rating;
+    
 
 /* 10. Encuentra la cantidad total de películas alquiladas por cada cliente y muestra el ID del cliente, su nombre y
 apellido junto con la cantidad de películas alquiladas.
@@ -178,6 +200,7 @@ Explicación:
 ---------------------------------------------------------------------------------------------
 */
 
+
 SELECT rating, AVG(length) AS average_length
 	FROM film 
 	GROUP BY rating;
@@ -185,13 +208,16 @@ SELECT rating, AVG(length) AS average_length
 
 -- 13. Encuentra el nombre y apellido de los actores que aparecen en la película con title "Indian Love".
 
+
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: 
+Explicación: 
 'INNER JOIN film_actor' --> para vincular actores con las películas en las que han actuado.
 'INNER JOIN film' --> para conseguir información sobre las películas.
 'WHERE title = 'Indian Love'' --> para que nos devuelva los resultados que cumplen la condición dada.
 ---------------------------------------------------------------------------------------------
 */
+
 
 SELECT a.first_name, a.last_name
 	FROM actor AS a
@@ -323,6 +349,7 @@ SELECT a.first_name, a.last_name, COUNT(fa.film_id) AS ttotal_movies
         
 -- 19. Encuentra el título de todas las películas que son "R" y tienen una duración mayor a 2 horas en la tabla film.
 
+
 /* 
 ---------------------------------------------------------------------------------------------
 Explicación:
@@ -348,6 +375,7 @@ Explicación:
 'HAVING average_length > 120' --> filtra cada grupo (categoría) y selecciona solo los que cumplen la condición dada.
 ---------------------------------------------------------------------------------------------
 */
+
 
 SELECT c.name AS category_name, AVG(f.length) AS average_length
 	FROM category AS c
@@ -460,6 +488,7 @@ WHERE a.actor_id NOT IN (
                                                         WHERE name = 'Horror')
 							);
                             
+                            
 /* 24. BONUS: Encuentra el título de las películas que son comedias y tienen una duración mayor a 180 minutos en la
 tabla film. 
 
@@ -471,6 +500,7 @@ Explicación:
 'WHERE name = 'Comedy' AND length > 180' --> para que el resultado cumpla las 2 condiciones que se piden.
 -------------------------------------------------------------------------------------------------- 
 */
+
 
 SELECT f.title
 	FROM film AS f
