@@ -2,11 +2,13 @@ USE sakila;
 
 -- 1. Selecciona todos los nombres de las películas sin que aparezcan duplicados.
 
+/*
 ---------------------------------------------------------------------------------------------
-/* Explicación: 
+Explicación: 
 'DISTINCT' para asegurar que, en el caso de que hubiese duplicados en la tabla, 
-solo devuelva títulos únicos. */ 
+solo devuelva títulos únicos.  
 ---------------------------------------------------------------------------------------------
+*/
 
 
 SELECT DISTINCT title
@@ -512,5 +514,8 @@ SELECT f.title
 
 
 /* 25. BONUS: Encuentra todos los actores que han actuado juntos en al menos una película. La consulta debe
-mostrar el nombre y apellido de los actores y el número de películas en las que han actuado juntos. */                          
+mostrar el nombre y apellido de los actores y el número de películas en las que han actuado juntos. */  
+select first_name, last_name, title from actor left join 
+(select actor_id, film.title from film_actor left join film using(film_id)) as second
+on actor.actor_id = second.actor_id;                      
 
